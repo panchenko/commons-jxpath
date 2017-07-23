@@ -184,8 +184,11 @@ public abstract class CoreOperationCompare extends CoreOperation {
         }
         else {
             if (l instanceof String || r instanceof String) {
-                l = InfoSetUtil.stringValue(l);
-                r = InfoSetUtil.stringValue(r);
+                // PATCH begin
+                final String ls = InfoSetUtil.stringValue(l);
+                final String rs = InfoSetUtil.stringValue(r);
+                return ls.equalsIgnoreCase(rs) ^ invert;
+                // PATCH end
             }
             result = l == r || l != null && l.equals(r);
         }
